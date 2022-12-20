@@ -1,24 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
+
+async function getMovie() {
+
+  const name = (document.getElementById('name').value);
+
+  const options = {
+    method: 'GET',
+    url: 'https://mdblist.p.rapidapi.com/',
+    params: {s: name },
+    headers: {
+      'X-RapidAPI-Key': '00c84aba3amsh0e4cb789e626209p1abfdejsnc79d512837a0',
+      'X-RapidAPI-Host': 'mdblist.p.rapidapi.com'
+      }
+  };
+
+  console.log(name);
+
+  try {
+
+    const response = await axios.request(options, 3000);
+    const data= (response.data.search);
+    console.log(response.data.search);
+
+    data.forEach((data) => {
+
+      const title = data.title;
+      document.getElementById('title').innerHTML += "<br>" + title;
+
+    });
+
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div className="App" id='app'>
+      <div>
+      <label htmlFor="movieName"><h1>Search For Movie</h1></label><br/><br/>
+      <input type="text" name="movieName" id='name'/><br/><br/>
+      <button onClick={getMovie}>Find</button>
+      <div>
+        
+      </div>
+      <h4 id='title'> </h4>
+      </div>        
     </div>
+
   );
 }
 
