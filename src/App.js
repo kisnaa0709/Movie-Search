@@ -4,7 +4,7 @@ import axios from "axios";
 async function getMovie() {
 
   const name = (document.getElementById('name').value);
-
+  document.getElementById('title').innerHTML = "";
   const options = {
     method: 'GET',
     url: 'https://mdblist.p.rapidapi.com/',
@@ -26,7 +26,7 @@ async function getMovie() {
     data.forEach((data) => {
 
       const title = data.title;
-      document.getElementById('title').innerHTML += "<br>" + title;
+      document.getElementById('title').innerHTML += "<li>" + title + "</li>" ;
 
     });
 
@@ -44,10 +44,12 @@ function App() {
       <label htmlFor="movieName"><h1>Search For Movie</h1></label><br/><br/>
       <input type="text" name="movieName" id='name'/><br/><br/>
       <button onClick={getMovie}>Find</button>
-      <div>
-        
+      <div>  
       </div>
-      <h4 id='title'> </h4>
+      <ol id='title'>
+
+      </ol>
+
       </div>        
     </div>
 
