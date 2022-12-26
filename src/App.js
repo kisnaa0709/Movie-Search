@@ -21,12 +21,14 @@ async function getMovie() {
 
     const response = await axios.request(options, 3000);
     const data= (response.data.search);
-    console.log(response.data.search);
+    console.log(data);
 
     data.forEach((data) => {
 
       const title = data.title;
-      document.getElementById('title').innerHTML += "<li>" + title + "</li>" ;
+      const year = data.year;
+      const type = data.type;
+      document.getElementById('title').innerHTML += "<li>" + title + " / <b>"+ year + "</b> /"+ type +"</li>"   ;
 
     });
 
